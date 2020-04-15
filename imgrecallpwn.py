@@ -2,11 +2,15 @@ import os
 import time
 from shutil import copy2
 from threading import Timer
+from datetime import datetime
 
+# change this path to the folder you want to store your images in
 output_path = "D:\\Documents\\Random\\21588\\output"
 
 
-def img_recall(image_folder):
+def img_recall(i):
+    year_month = get_time()
+    image_folder = i + year_month
     code = 0
     chopping_list = []
     before = dict([(f, None) for f in os.listdir(image_folder)])
@@ -74,6 +78,13 @@ def image_decode(f, fn, code):
     png_write.close()
 
 
+def get_time():
+    today = datetime.today()
+    year_month = datetime(today.year, today.month, 1)
+    return str(year_month)[:7]
+
+
 if __name__ == "__main__":
-    img_folder = "D:\\Documents\\WeChat Files\\wilsongao-\\FileStorage\\Image\\2020-04"
+    # change this path to where the images are stored, current year and month
+    img_folder = "D:\\Documents\\WeChat Files\\wilsongao-\\FileStorage\\Image\\"
     img_recall(img_folder)
