@@ -2,7 +2,6 @@ import os
 import time
 from shutil import copy2
 from threading import Timer
-from decoder import imageDecode
 
 output_path = "D:\\Documents\\Random\\21588\\output"
 
@@ -16,8 +15,8 @@ def img_recall(image_folder):
         after = dict([(f, None) for f in os.listdir(image_folder)])
         added = [f for f in after if not (f in before)]
         removed = [f for f in before if not (f in after)]
-        chopping_list.extend(added)
         if added:
+            chopping_list.extend(added)
             if code == 0:
                 temp_path = os.path.join(image_folder, added[0])
                 code = get_code(temp_path)
@@ -31,7 +30,7 @@ def img_recall(image_folder):
             for file in removed:
                 if file in chopping_list:
                     temp_path = os.path.join(output_path, file)
-                    imageDecode(temp_path, file, code)
+                    image_decode(temp_path, file, code)
                     print("Decoded:", file)
                     chopping_list.remove(file)
                     delete_file(temp_path)
@@ -61,6 +60,18 @@ def get_code(f):
         for byte in a:
             code = byte ^ 0xFF
             return code
+
+
+def image_decode(f, fn, code):
+    dat_read = open(f, "rb")
+    out = output_path + fn + ".png"
+    png_write = open(out, "wb")
+    for now in dat_read:
+        for byte in now:
+            new_byte = byte ^ code
+            png_write.write(bytes([new_byte]))
+    dat_read.close()
+    png_write.close()
 
 
 if __name__ == "__main__":
