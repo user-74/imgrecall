@@ -14,3 +14,5 @@ C:\\Users\\(your username)\\Documents\\WeChat Files\\(your wechat username)\\Fil
 3. Run wechat and run imerecallpwn.py.
 
 
+### Credits
+

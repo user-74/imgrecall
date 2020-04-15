@@ -67,15 +67,15 @@ def get_code(f):
 
 
 def image_decode(f, fn, code):
-    dat_read = open(f, "rb")
+    file = open(f, "rb")
     out = output_path + fn + ".png"
-    png_write = open(out, "wb")
-    for now in dat_read:
-        for byte in now:
+    png = open(out, "wb")
+    for a in file:
+        for byte in a:
             new_byte = byte ^ code
-            png_write.write(bytes([new_byte]))
-    dat_read.close()
-    png_write.close()
+            png.write(bytes([new_byte]))
+    file.close()
+    png.close()
 
 
 def get_time():
