@@ -1,41 +1,68 @@
+import os
+import time
 from shutil import copy2
+from threading import Timer
+from decoder import imageDecode
 
-import os, time
-import decoder
+output_path = "D:\\Documents\\Random\\21588\\output"
 
 
-def img_recall(path_to_watch):
+def img_recall(image_folder):
+    code = 0
     chopping_list = []
-    output_path = "D:\\Documents\\Random\\21588\\output"
-    before = dict([(f, None) for f in os.listdir(path_to_watch)])
+    before = dict([(f, None) for f in os.listdir(image_folder)])
     while 1:
         time.sleep(1)
-        after = dict([(f, None) for f in os.listdir(path_to_watch)])
+        after = dict([(f, None) for f in os.listdir(image_folder)])
         added = [f for f in after if not (f in before)]
         removed = [f for f in before if not (f in after)]
+        chopping_list.extend(added)
         if added:
+            if code == 0:
+                temp_path = os.path.join(image_folder, added[0])
+                code = get_code(temp_path)
             print("Added: ", ", ".join(added))
             for file in added:
-                orig = path_to_watch + "\\" + file
+                orig = os.path.join(image_folder, file)
                 copy2(orig, output_path)
-                temp_path = os.path.join(output_path, file)
-                decoder.imageDecode(temp_path, file)
-                print("Converted", file)
-                # chopping_list.add(file)
+                t = Timer(310.0, cleaner, [file, chopping_list])
+                t.start()
         if removed:
             for file in removed:
-                if file not in chopping_list:
-                    delete_file(file)
+                if file in chopping_list:
+                    temp_path = os.path.join(output_path, file)
+                    imageDecode(temp_path, file, code)
+                    print("Decoded:", file)
+                    chopping_list.remove(file)
+                    delete_file(temp_path)
             print("Removed: ", ", ".join(removed))
         before = after
+
+
+def cleaner(file, chopping_list):
+    if file in chopping_list:
+        print("Timer up, deleting file:", file)
+        temp_path = os.path.join(output_path, file)
+        delete_file(temp_path)
+        chopping_list.remove(file)
 
 
 def delete_file(file):
     if os.path.isfile(file):
         os.remove(file)
+        print("Deleted:", file)
     else:  # Show an error
         print("Error: %s file not found" % file)
 
 
+def get_code(f):
+    file = open(f, "rb")
+    for a in file:
+        for byte in a:
+            code = byte ^ 0xFF
+            return code
+
+
 if __name__ == "__main__":
-    img_recall("D:\\Documents\\WeChat Files\\wilsongao-\\FileStorage\\Image\\2020-04")
+    img_folder = "D:\\Documents\\WeChat Files\\wilsongao-\\FileStorage\\Image\\2020-04"
+    img_recall(img_folder)
