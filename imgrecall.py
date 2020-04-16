@@ -67,6 +67,8 @@ def get_code(f):
             return code
 
 
+# credit: MarxCBR
+
 def image_decode(f, fn, code):
     file = open(f, "rb")
     out = output_path + fn + ".png"
