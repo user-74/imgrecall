@@ -5,7 +5,8 @@ from threading import Timer
 from datetime import datetime
 
 # change this path to the folder you want to store your images in
-output_path = "D:\\Documents\\Random\\21588\\output"
+# e.g. "D:\\Documents\\output"
+output_path = ""
 
 
 def img_recall(i):
@@ -85,6 +86,7 @@ def get_time():
 
 
 if __name__ == "__main__":
-    # change this path to where the images are stored, current year and month
-    img_folder = "D:\\Documents\\WeChat Files\\wilsongao-\\FileStorage\\Image\\"
+    # change this path to where the images are stored
+    # e.g. C:\\Users\\{computer username}\\Documents\\WeChat Files\\{wechat username}\\FileStorage\\Image\\
+    img_folder = ""
     img_recall(img_folder)
