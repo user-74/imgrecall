@@ -2,7 +2,9 @@
 
 ## Introduction
 
-My first side project. 
+My first side project. Got the inspiration for it when an image I was viewing was recalled and disappeared.
+
+
 In Wechat, when an image is recalled, Wechat will automatically delete that image from the image folder on your computer.
 imgrecall watches your Wechat image folder for automatically downloaded images and creates a backup of anything new it sees.
 It also keeps a list of every newly added image within the last 5 minutes. After 5 minutes, photos can no longer be recalled, so it deletes the backup.
