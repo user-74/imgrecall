@@ -6,10 +6,6 @@ from threading import Timer
 from datetime import datetime
 
 
-# change this path to the folder you want to store your images in
-# e.g. "D:\\Documents\\output"
-
-
 def img_recall(i):
     year_month = get_time()
     image_folder = i + year_month
@@ -72,7 +68,7 @@ def get_code(f):
 
 def image_decode(f, fn, code):
     file = open(f, "rb")
-    out = output_path + fn + ".png"
+    out = output_path + "\\" + fn + ".png"
     png = open(out, "wb")
     for a in file:
         for byte in a:
@@ -89,8 +85,6 @@ def get_time():
 
 
 if __name__ == "__main__":
-    # change this path to where the images are stored
-    # e.g. C:\\Users\\{computer username}\\Documents\\WeChat Files\\{wechat username}\\FileStorage\\Image\\
     global output_path
     output_path = input("output path:")
     if not os.path.isdir(output_path):
