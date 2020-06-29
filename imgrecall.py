@@ -1,12 +1,13 @@
 import os
+import sys
 import time
 from shutil import copy2
 from threading import Timer
 from datetime import datetime
 
+
 # change this path to the folder you want to store your images in
 # e.g. "D:\\Documents\\output"
-output_path = ""
 
 
 def img_recall(i):
@@ -90,5 +91,11 @@ def get_time():
 if __name__ == "__main__":
     # change this path to where the images are stored
     # e.g. C:\\Users\\{computer username}\\Documents\\WeChat Files\\{wechat username}\\FileStorage\\Image\\
-    img_folder = ""
-    img_recall(img_folder)
+    global output_path
+    output_path = input("output path:")
+    if not os.path.isdir(output_path):
+        sys.exit("output path is an invalid directory")
+    img_folder = input("wechat image folder path:")
+    if not os.path.isdir(img_folder):
+        sys.exit("the image folder is invalid")
+    img_recall(img_folder + "\\")
