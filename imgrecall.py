@@ -9,6 +9,7 @@ from datetime import datetime
 def img_recall(i):
     year_month = get_time()
     image_folder = i + year_month
+    print("Starting up... Looking for new files in:", image_folder)
     code = 0
     chopping_list = []
     before = dict([(f, None) for f in os.listdir(image_folder)])
@@ -63,8 +64,6 @@ def get_code(f):
             code = byte ^ 0xFF
             return code
 
-
-# credit: MarxCBR
 
 def image_decode(f, fn, code):
     file = open(f, "rb")
