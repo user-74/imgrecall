@@ -25,7 +25,7 @@ If the image is not recalled for longer than 5 minutes, the .dat copy is deleted
 1. Run imgrecall.py using python 3. A terminal window should open,
 2. Enter your desired output folder path into the window
 3. Enter your wechat image folder
-The format should be similar to : C:\Users\{computer username}\Documents\WeChat Files\{wechat username}\FileStorage\Image
+The format should be similar to: C:\Users\{computer username}\Documents\WeChat Files\{wechat username}\FileStorage\Image
 4. Any photos recalled should now appear in your output folder.
 
 ## Versions
