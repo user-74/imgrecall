@@ -21,6 +21,12 @@ If the image is recalled, the .dat copy is decoded to give the original image as
 
 If the image is not recalled for longer than 5 minutes, the .dat copy is deleted.
 
+Note that the image must have appeared on your computer at some point. If the image is recalled before Wechat even sees it, then it will not catch it.
+
+## Future Improvements
+
+Currently only supports .jpg files, but most images sent from a phone will be jpgs. Will include support for .png and .gif in the future.
+
 ## Usage
 
 1. Make sure Wechat is running with Auto-dowload of files enabled.
